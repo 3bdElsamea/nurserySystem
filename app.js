@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080; //Used in Listening
 // CORS
 const cors = require("cors");
 app.use(cors());
@@ -12,10 +12,12 @@ app.use(Loggings("dev"));
 // Authintication MW
 app.use((request, response, next) => {
   if (true) {
+    console.log("Authinticated");
     next();
   } else {
+    console.log("Not Authinticated");
     // Throw Error
-    next("Not Authenticated");
+    next(new Error("Not Authenticated"));
   }
 });
 
@@ -31,4 +33,9 @@ app.use((request, response) => {
 // Error MW
 app.use((error, request, response, next) => {
   response.status(500).json({ message: error + "" });
+});
+
+// Listening
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
