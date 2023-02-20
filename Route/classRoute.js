@@ -2,8 +2,7 @@ const express = require("express");
 const classController = require("../Controller/classController.js");
 const validateMW = require("../Core/Validation/validateMW");
 const validateClass = require("../Core/Validation/validateClass.js");
-
-const { param } = require("express-validator");
+const validateParam = require("./../Core/Validation/paramValidation");
 
 const router = express.Router();
 
@@ -15,12 +14,12 @@ router
   .patch(validateClass.optValidateClassArray, validateMW, classController.updateClass)
   .delete(validateClass.optValidateClassArray, validateMW, classController.deleteClass);
 
-// Get Class by id
-router.get("/class/:id", [param("_id").isInt().withMessage(" ID must be an Integer")], validateMW, classController.getClassById);
+// Get & Delete Class by id
+router.route("/class/:id").get(validateParam.validateParamInteger, validateMW, classController.getClassById).delete(validateParam.validateParamInteger, validateMW, classController.deleteClass);
 
 // Get class Children
-router.get("/classChildern/:id", [param("_id").isMongoId().withMessage(" ID must be an Integer")], validateMW, classController.getClassChildren);
+router.get("/classChildern/:id", validateParam.validateParamInteger, validateMW, classController.getClassChildren);
 
 // Get class Supervisor
-router.get("/classTeacher/:id", [param("_id").isInt().withMessage(" ID must be an Integer")], validateMW, classController.getClassSupervisor);
+router.get("/classTeacher/:id", validateParam.validateParamObjectId, validateMW, classController.getClassSupervisor);
 module.exports = router;
