@@ -9,9 +9,10 @@ router
   .route("/teachers")
   .get(teacherController.getAllTeachers)
   .post(validateTeacher.validateTeacherArray, validateMW, teacherController.addTeacher)
-  .patch(validateTeacher.optValidateTeacherArray, validateMW, teacherController.updateTeacher);
+  .patch(validateTeacher.optValidateTeacherArray, validateMW, teacherController.updateTeacher)
+  .delete(validateTeacher.optValidateTeacherArray, validateMW, teacherController.deleteTeacher);
 
 //   Delete by Id
-router.delete("/teachers/:id", validateParam.validateParamObjectId, validateMW, teacherController.deleteTeacher);
+// router.delete("/teachers/:id", validateParam.validateParamObjectId, validateMW, teacherController.deleteTeacher);
 
 module.exports = router;

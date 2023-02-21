@@ -1,16 +1,28 @@
 const express = require("express");
 const cors = require("cors");
 const Loggings = require("morgan");
+const mongoose = require("mongoose");
 const teacherRoute = require("./Route/teacherRoute");
 const childRoute = require("./Route/childRoute");
 const classRoute = require("./Route/classRoute");
 const port = process.env.PORT || 8080; //Used in Listening
 const app = express();
 
-// Listening
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+// Strict Query Handiling
+mongoose.set("strictQuery", true);
+// Db Connection
+mongoose // taskbar plz
+  .connect("mongodb://127.0.0.1:27017/NurserySystemDB")
+  .then(() => {
+    console.log("DB connected");
+    // Listening
+    app.listen(port, () => {
+      console.log(`Listening on port ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.log("Db Problem " + error);
+  });
 
 // CORS
 app.use(cors());
