@@ -1,7 +1,7 @@
 const { body } = require("express-validator");
 // _id(Number), fullName, age , level (PreKG,KG1,KG2), address(city,street and building)
 exports.validateChildArray = [
-  body("_id").isInt().withMessage("Child ID must be an Integer"),
+  // body("_id").isInt().withMessage("Child ID must be an Integer"),
   body("fullName").isString().withMessage("Child Full Name must be a String"),
   body("age").isInt().withMessage("Child Age must be an Integer"),
   body("level").isIn(["PreKG", "KG1", "KG2"]).withMessage("Child Level must be a String"),

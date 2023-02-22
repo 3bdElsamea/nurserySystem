@@ -1,5 +1,5 @@
 let mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
+const autoIncrement = require("mongoose-sequence")(mongoose);
 
 // Child Schema
 let childSchema = new mongoose.Schema({
@@ -28,13 +28,6 @@ let childSchema = new mongoose.Schema({
 
 // Auto Increment
 childSchema.plugin(autoIncrement, { id: "childId", inc_field: "_id" });
-
-// childSchema.plugin(autoIncrement.plugin, {
-//   model: "childs",
-//   field: "_id",
-//   startAt: 1,
-//   incrementBy: 1,
-// });
 
 // Mapping Schema to Model
 mongoose.model("childs", childSchema);

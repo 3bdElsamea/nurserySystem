@@ -20,7 +20,6 @@ exports.getAllTeachers = (req, res, next) => {
 
 // Add a Teacher
 exports.addTeacher = (req, res, next) => {
-  console.log(req.body);
   new teachersSchema({
     _id: req.body._id,
     fullName: req.body.fullName,
@@ -69,5 +68,5 @@ exports.deleteTeacher = (req, res, next) => {
         next(new Error("Teacher not found"));
       } else res.status(200).json({ data });
     })
-    .catch((err) => next(err));
+      .catch((err) => next(err));
 };

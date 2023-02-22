@@ -14,11 +14,13 @@ let classSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: [true, "Please Enter Class Supervisor"],
   },
-  children: {
-    ref: "childs",
-    type: mongoose.Schema.Types.ObjectId,
-    required: [true, "Please Enter Class Children"],
-  },
+  children: [
+    {
+      ref: "childs",
+      type: Number,
+      required: [true, "Please Enter Class Children"],
+    },
+  ],
 });
 //Auto Increment
 classSchema.plugin(autoIncrement, { id: "classId", inc_field: "_id" });

@@ -10,9 +10,10 @@ router
   .route("/childs")
   .get(childController.getAllChildren)
   .post(validateChild.validateChildArray, validateMW, childController.addChild)
-  .patch(validateChild.optValidateChildArray, validateMW, childController.updateChild);
+  .patch(validateChild.optValidateChildArray, validateMW, childController.updateChild)
+  .delete(validateChild.optValidateChildArray, validateMW, childController.deleteChild);
 
 // Get & Delete Child by id
-router.route("/childs/:id").get(validateParam.validateParamInteger, validateMW, childController.getChildById).delete(validateParam.validateParamInteger, validateMW, childController.deleteChild);
+router.route("/childs/:id").get(validateParam.validateParamInteger, validateMW, childController.getChildById);
 
 module.exports = router;
