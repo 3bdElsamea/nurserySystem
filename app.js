@@ -5,7 +5,10 @@ const mongoose = require("mongoose");
 const teacherRoute = require("./Route/teacherRoute");
 const childRoute = require("./Route/childRoute");
 const classRoute = require("./Route/classRoute");
+const loginRoute = require("./Route/loginRoute");
+const autentication = require("./Core/Authentication/authenticationMW");
 const port = process.env.PORT || 8080; //Used in Listening
+process.env.SECRET_KEY = "iti";
 const app = express();
 
 // Strict Query Handiling
@@ -35,6 +38,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Use Routes
+app.use(loginRoute);
+app.use(autentication); //AuthenticationMW
 app.use(teacherRoute);
 app.use(childRoute);
 app.use(classRoute);
