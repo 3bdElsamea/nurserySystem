@@ -45,7 +45,7 @@ exports.addClass = (req, res, next) => {
 
       data = data.map((obj) => Number(obj._id));
       req.body.children = req.body.children.map((_id) => Number(_id));
-      req.body.children = [...new Set(req.body.children)];
+      req.body.children = [...new Set(req.body.children)]; //Set dosen't allow duplicates
 
       console.log(data);
       console.log(req.body.children);
